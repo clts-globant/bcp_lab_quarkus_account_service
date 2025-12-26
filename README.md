@@ -137,8 +137,9 @@ Then simply execute with: `./target/account-service-1.0.0-SNAPSHOT-runner`
 
 ## Generating a valid JWT
 
-The JWT is only checked for completeness, not for full authorization+authentication, as a full identity system
-wasn't implemented for the whole solution. As long as the JWT is valid, it should be usable.
+The JWT is only checked for completeness + the ROLE_ADMIN role/permission, not for full
+authorization+authentication, as a full identity system wasn't implemented for the whole solution.
+Otherwise, it should be usable.
 
 Instructions to generate a key pair: https://techdocs.akamai.com/iot-token-access-control/docs/generate-rsa-keys
 Instructions to generate a JWT wit said keys: https://techdocs.akamai.com/iot-token-access-control/docs/generate-jwt-rsa-key
