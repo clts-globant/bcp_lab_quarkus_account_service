@@ -1,0 +1,31 @@
+---
+# Test profile
+"%test":
+  quarkus:
+    banner:
+      enabled: true
+    datasource:
+      db-kind: h2
+      jdbc:
+        url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=0;DB_CLOSE_ON_EXIT=FALSE
+    hibernate-orm:
+      database:
+        generation: drop-and-create
+      sql-load-script: import-data.sql
+    # Health check configuration for tests - exclude Kafka checks
+    smallrye-health:
+      ui:
+        always-include: true
+      check:
+        "io.smallrye.reactive.messaging.health.SmallRyeReactiveMessagingLivenessCheck":
+          enabled: false
+        "io.smallrye.reactive.messaging.health.SmallRyeReactiveMessagingReadinessCheck":
+          enabled: false
+        "io.smallrye.reactive.messaging.health.SmallRyeReactiveMessagingStartupCheck":
+          enabled: false
+  mp:
+    messaging:
+      incoming:
+        transactionss:
+          connector: smallrye-in-memory
+

@@ -1,0 +1,92 @@
+# Database configuration
+quarkus:
+  datasource:
+    db-kind: postgresql
+    username: account_user
+    password: account_password
+    jdbc:
+      url: jdbc:postgresql://localhost:5432/account_db
+
+  # Hibernate ORM configuration
+  hibernate-orm:
+    database:
+      generation: update
+    log:
+      sql: true
+
+  # HTTP configuration
+  http:
+    port: 8082
+    cors:
+      ~: true
+      origins: "*"
+      headers: "*"
+      methods: "*"
+
+  # Health check configuration
+  smallrye-health:
+    ui:
+      always-include: true
+
+  # Logging configuration
+  log:
+    level: INFO
+    category:
+      "com.bank.account":
+        level: DEBUG
+
+  # Metrics configuration
+  micrometer:
+    export:
+      prometheus:
+        enabled: true
+        path: /q/metrics
+
+  # Application configuration
+  application:
+    name: account-service
+    version: 1.0.0-SNAPSHOT
+
+  # JWT configuration
+  smallrye-jwt:
+    enabled: true
+
+# Kafka configuration
+kafka:
+  bootstrap:
+    servers: localhost:9092
+
+# MicroProfile configuration
+mp:
+  jwt:
+    verify:
+      publickey:
+        location: META-INF/resources/publicKey.pem
+      issuer: https://banking.local
+  messaging:
+    incoming:
+      transactionss:
+        connector: smallrye-kafka
+        topic: transaction.events
+        value:
+          deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    #outgoing:
+    #  account-events:
+    #    connector: smallrye-kafka
+    #    topic: account.events
+    #    value:
+    #      serializer: io.quarkus.kafka.client.serialization.ObjectMapperSerializer
+
+---
+# Dev profile
+"%dev":
+  quarkus:
+    datasource:
+      jdbc:
+        url: jdbc:postgresql://localhost:5432/account_db
+    hibernate-orm:
+      database:
+        generation: drop-and-create
+      sql-load-script: import-data.sql
+
+
