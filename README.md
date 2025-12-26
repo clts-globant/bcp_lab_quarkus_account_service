@@ -80,6 +80,9 @@ curl -v -X POST http://localhost:8082/api/accounts/acc-12345/credit
 
 The amount, as it can be seen, uses dots for decimal/cents precision. Don't use negative values.
 
+Basic health checks (like `q/health`) and metrics are supported thanks to Quarkus/micrometer. 
+Read https://quarkus.io/guides/management-interface-reference for more details.
+
 ## Unit/integration tests
 Run
 ```shell script
