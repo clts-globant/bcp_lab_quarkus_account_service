@@ -19,7 +19,7 @@ public class TransactionEventConsumer {
     
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Incoming("transactionss")
+    @Incoming("transactions")
     public void processTransactionEvent(String eventJson) {
         LOG.infof("Received transaction event: %s", eventJson);
         

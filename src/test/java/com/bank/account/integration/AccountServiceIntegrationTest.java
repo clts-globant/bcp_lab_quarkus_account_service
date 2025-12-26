@@ -331,8 +331,8 @@ public class AccountServiceIntegrationTest {
 
     @Test
     public void testTransactionEventReceived() {
-        InMemoryConnector.switchIncomingChannelsToInMemory("transactionss");
-        InMemorySource<String> input = connectorIntegration.source("transactionss");
+        InMemoryConnector.switchIncomingChannelsToInMemory("transactions");
+        InMemorySource<String> input = connectorIntegration.source("transactions");
         String eventJson = String.format(
                 "{\"eventType\":\"TRANSACTION_COMPLETED\", \"originAccount\":\"%s\", \"destinationAccount\":\"%s\", \"amount\":\"%s\", \"transactionId\":\"tx-123\"}",
                 "1234567890123456", "1234567890123457", "5");

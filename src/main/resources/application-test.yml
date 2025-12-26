@@ -26,6 +26,6 @@
   mp:
     messaging:
       incoming:
-        transactionss:
+        transactions:
           connector: smallrye-in-memory
 

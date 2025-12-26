@@ -32,13 +32,13 @@ public class AccountServiceEventTest {
 
   @BeforeAll
   public static void switchMyChannels() {
-    InMemoryConnector.switchIncomingChannelsToInMemory("transactionss");
-    InMemoryConnector.switchOutgoingChannelsToInMemory("transactionss");
+    InMemoryConnector.switchIncomingChannelsToInMemory("transactions");
+    InMemoryConnector.switchOutgoingChannelsToInMemory("transactions");
   }
 
   @Test
   void testProcessTransactionEvent_whenTransactionCompleted() {
-    InMemorySource<String> input = connector.source("transactionss");
+    InMemorySource<String> input = connector.source("transactions");
     String originAccount = "ACC-001";
     String destinationAccount = "ACC-002";
     BigDecimal amount = new BigDecimal("250.75");
@@ -57,7 +57,7 @@ public class AccountServiceEventTest {
   @Test
   void testProcessTransactionEvent_whenTransactionFailed() {
     String eventJson = "{\"eventType\":\"TRANSACTION_FAILED\", \"transactionId\":\"tx-456\", \"reason\":\"Insufficient funds\"}";
-    InMemorySource<String> input = connector.source("transactionss");
+    InMemorySource<String> input = connector.source("transactions");
     input.send(eventJson);
 
     await().pollDelay(1, TimeUnit.SECONDS).until(() -> true);
@@ -66,7 +66,7 @@ public class AccountServiceEventTest {
 
   @Test
   void testProcessTransactionEvent_whenEventTypeIsUnknown() {
-    InMemorySource<String> input = connector.source("transactionss");
+    InMemorySource<String> input = connector.source("transactions");
     String eventJson = "{\"eventType\":\"TRANSACTION_PENDING\", \"transactionId\":\"tx-789\"}";
     input.send(eventJson);
     await().pollDelay(1, TimeUnit.SECONDS).until(() -> true);
@@ -75,7 +75,7 @@ public class AccountServiceEventTest {
 
   @Test
   void testProcessTransactionEvent_whenJsonIsMalformed() {
-    InMemorySource<String> input = connector.source("transactionss");
+    InMemorySource<String> input = connector.source("transactions");
     String malformedJson = "{\"eventType\":\"TRANSACTION_COMPLETED\", "; // Invalid JSON
     input.send(malformedJson);
     await().pollDelay(1, TimeUnit.SECONDS).until(() -> true);

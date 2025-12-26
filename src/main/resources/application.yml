@@ -65,17 +65,11 @@ mp:
       issuer: https://banking.local
   messaging:
     incoming:
-      transactionss:
+      transactions:
         connector: smallrye-kafka
         topic: transaction.events
         value:
           deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    #outgoing:
-    #  account-events:
-    #    connector: smallrye-kafka
-    #    topic: account.events
-    #    value:
-    #      serializer: io.quarkus.kafka.client.serialization.ObjectMapperSerializer
 
 ---
 # Dev profile
