@@ -94,6 +94,11 @@ Run
 ./mvnw test
 ```
 
+## Before running
+
+Don't forget to boot up a PostgreSQL instance plus a Kafka cluster before starting this service.
+Respective ports/URLs and kafka topic can be configured in `src/main/resources/application.yml`
+
 ## Running the application in dev mode
 
 You can run your application in dev mode + live coding:
