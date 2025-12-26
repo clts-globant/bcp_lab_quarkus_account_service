@@ -21,6 +21,9 @@ curl -v -X GET http://localhost:8082/api/accounts/customer/{customer_id}
 -H "Authorization: Bearer $JWT_TOKEN"
 `
 
+Details include accountNumber, related customer id, balance, account type (not relevant in this version),
+status (`ACTIVE` to be ready for transactions), and timestamps of creation (to be deleted in the future).
+
 * Create an account
 
 `
@@ -42,6 +45,8 @@ curl -v -X POST http://localhost:8082/api/accounts
 curl -v -X GET http://localhost:8082/api/accounts/{account_id}/balance
 -H "Authorization: Bearer $JWT_TOKEN"
 `
+
+Similar to account details, but just balance + status.
 
 * Check validity of an account for a transaction (status, balance, etc.)
 
